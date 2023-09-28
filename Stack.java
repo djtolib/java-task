@@ -23,7 +23,13 @@ public class Stack {
     return (position == 0);
   }
 
+  // Я бы еще добавил метод size, т.к. он во всех стандартных коллекциях присутствует
+  public int size(){
+    return position;
+  }
+  
   public boolean equals(Stack o) {
+    if(o == null) return false;
     if(this == o) return true;
     return Arrays.equals(buf, o.buf);
   }
