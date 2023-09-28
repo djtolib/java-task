@@ -8,13 +8,15 @@ public class Stack {
   }
 
   public void push(Object o) {
-    if (position > buf.length - 1) throw new OutOfMemoryError();
+    if (position > buf.length - 1) throw new StackOverflowException();
     buf[position++] = o;
   }
 
   public Object pop() {
     if (position <= 0) return null;
-    return buf[--position];
+    Object res = buf[--position];
+    buf[position] = null;
+    return res;
   }
 
   public boolean isEmpty() {
@@ -22,6 +24,11 @@ public class Stack {
   }
 
   public boolean equals(Stack o) {
-    return (buf == o.buf);
+    if(this == o) return true;
+    return Arrays.equals(buf, o.buf);
   }
+  
 }
+
+// Такого эксепшна нет, решил свой определить :)
+class StackOverflowException extends RuntimeException{}
